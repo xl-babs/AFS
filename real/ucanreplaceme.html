@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Harassment Feedback</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff0f0;
+      padding: 40px;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background-color: #fff;
+      padding: 30px;
+      border: 2px solid #d9534f;
+      border-radius: 10px;
+    }
+    h1 {
+      color: #d9534f;
+    }
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    /* Status Box Styling */
+    .status-box {
+      margin-top: 40px;
+      padding: 20px;
+      border: 2px solid #999;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+    }
+    .status-box h2 {
+      margin-top: 0;
+      color: #555;
+    }
+    .status-tag {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 6px;
+      background-color: #ccc;
+      color: #333;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .status-tag.green {
+      background-color: #28a745;
+      color: white;
+    }
+    .status-buttons {
+      margin-top: 15px;
+    }
+    button {
+      margin-right: 10px;
+      padding: 8px 16px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Harassment Report</h1>
+    <p><strong>Company:</strong> QuantumTech Solutions</p>
+    <p><strong>Date:</strong> August 19, 2025</p>
+    <p>
+      I’m submitting this anonymously because I don’t feel safe speaking up publicly. Over the past few weeks, I’ve experienced repeated inappropriate comments from a colleague during meetings and in private messages. These remarks were personal, unprofessional, and made me feel deeply uncomfortable.
+    </p>
+    <p>
+      I’ve tried to ignore it, but it’s affecting my ability to work and feel secure in the office. I’m asking that this be taken seriously and investigated discreetly. No one should have to choose between their job and their dignity.
+    </p>
+
+    <!-- Separate Status Box -->
+    <div class="status-box">
+      <h2>Follow-Up Status</h2>
+      <p><strong>Has this issue been addressed?</strong></p>
+      <div class="status-buttons">
+        <button onclick="markAsAddressed(true)">Yes</button>
+        <button onclick="markAsAddressed(false)">No</button>
+      </div>
+      <div id="statusTag" class="status-tag">Pending Review</div>
+    </div>
+  </div>
+
+  <script>
+    function markAsAddressed(answered) {
+      const tag = document.getElementById("statusTag");
+      if (answered) {
+        tag.textContent = "Addressed";
+        tag.classList.add("green");
+      } else {
+        tag.textContent = "Pending Review";
+        tag.classList.remove("green");
+      }
+    }
+  </script>
+</body>
+</html>

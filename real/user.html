@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Anonymous Feedback System</title>
+  <style>
+    body {
+      background-color: lightgrey;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    form {
+      background-color: white;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px black;
+      max-width: 600px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    p.form-item {
+      margin-bottom: 25px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    textarea, select, input[type="file"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid grey;
+      border-radius: 8px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: blue;
+      color: white;
+      padding: 15px 25px;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:active {
+      background-color: darkblue;
+    }
+    /* Link to Admin Dashboard */
+    .admin-link {
+      display: block;
+      text-align: center;
+      margin-top: 30px;
+      font-size: 16px;
+    }
+    .admin-link a {
+      color: blue;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .admin-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <form action="#" method="post" enctype="multipart/form-data">
+    <h1>Submit Anonymous Feedback</h1>
+    <p>Please provide your feedback or describe the issue. Your identity will be kept anonymous.</p>
+
+    <p class="form-item">
+      <label for="feedback">Feedback</label>
+      <textarea id="feedback" name="feedback" rows="6" placeholder="Describe your experience, concern, suggestion, etc."></textarea>
+    </p>
+
+    <p class="form-item">
+      <label for="category">Category</label>
+      <select id="category" name="category">
+        <option value="">Select a category</option>
+        <option value="complaint">Complaint</option>
+        <option value="praise">Praise</option>
+        <option value="harassment">Harassment</option>
+        <option value="suggestion">Suggestion</option>
+        <option value="other">Other</option>
+      </select>
+    </p>
+
+    <p class="form-item">
+      <label for="file">Attach File (optional)</label>
+      <input type="file" id="file" name="file">
+      <span>No file chosen</span>
+    </p>
+
+    <p>
+      <button type="submit">Submit</button>
+    </p>
+
+    <!-- <p class="admin-link">
+      <a href="admin.html">Go to Admin Dashboard</a>
+    </p> -->
+  </form>
+
+</body>
+</html>

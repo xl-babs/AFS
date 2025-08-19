@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anonymous Feedback System - Home</title>
+    <!-- Tailwind CSS CDN for easy styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom CSS for the image banner */
+        .image-gallery {
+            position: relative;
+            width: 100%;
+            height: 350px; /* Adjust height as needed for your banner */
+            overflow: hidden;
+            border-radius: 0.75rem; /* Equivalent to Tailwind's rounded-lg */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            margin-bottom: 2rem; /* Space between banner and main content */
+        }
+
+        .image-gallery img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures images cover the area without distortion */
+            opacity: 0; /* Hidden by default */
+            transition: opacity 1s ease-in-out; /* Smooth fade transition */
+        }
+
+        .image-gallery img.active {
+            opacity: 1; /* Make the active image visible */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center font-sans text-gray-800 p-4">
+
+    <!-- Image Banner -->
+    <div class="image-gallery">
+        <img src="/images/ano.jpg" alt="Team collaborating">
+        <img src="/images/opinion.jpg" alt="Gathering opinions">
+        <img src="/images/feed back.jpg" alt="People giving feedback">
+    </div>
+
+    <div class="container bg-white p-8 md:p-12 rounded-lg shadow-xl max-w-2xl w-full text-center">
+        <h1 class="text-3xl md:text-4xl font-bold text-blue-700 mb-4">Welcome to the Anonymous Feedback System</h1>
+        <p class="text-base md:text-lg text-gray-600 leading-relaxed mb-8">
+            Our Anonymous Feedback System provides a secure and confidential platform for individuals to share their thoughts, suggestions, concerns, or praise. Your input is invaluable in helping us improve, and your identity remains completely anonymous. Whether it's a suggestion for a new feature, a concern about an issue, or positive feedback, your voice matters.
+        </p>
+        <div class="buttons flex flex-col md:flex-row justify-center gap-4">
+            <a href="user.html">
+                <button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                    Submit Feedback
+                </button>
+            </a>
+            <a href="admin.html">
+                <button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                    View Admin Dashboard
+                </button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const images = document.querySelectorAll('.image-gallery img');
+            let currentImageIndex = 0;
+
+            // Function to show a specific image
+            function showImage(index) {
+                // Remove 'active' class from all images
+                images.forEach(img => img.classList.remove('active'));
+                // Add 'active' class to the current image
+                images[index].classList.add('active');
+            }
+
+            // Function to go to the next image
+            function nextImage() {
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                showImage(currentImageIndex);
+            }
+
+            // Initially show the first image
+            showImage(currentImageIndex);
+
+            // Change image every 2 seconds
+            setInterval(nextImage, 2000); // 2000 milliseconds = 2 seconds
+        });
+    </script>
+</body>
+</html>

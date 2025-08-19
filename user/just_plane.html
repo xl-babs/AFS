@@ -1,0 +1,122 @@
+<html>
+<head>
+    <title> AFS </title>
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+</head>
+</html>
+
+<title>Anonymous Feedback System</title>
+
+
+
+
+
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Anonymous Feedback System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .dashboard {
+      max-width: 700px;
+      margin: 50px auto;
+      background-color: white;
+      padding: 40px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    p.description {
+      text-align: center;
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    textarea, select, input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      resize: vertical;
+      font-size: 14px;
+    }
+
+    .submit-btn {
+      margin-top: 30px;
+      padding: 12px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: #0056b3;
+    }
+
+    .file-label {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard">
+    <h1>Submit Anonymous Feedback</h1>
+    <p class="description">Please provide your feedback or describe the issue. Your identity will be kept anonymous.</p>
+
+    <form action="#" method="post" enctype="multipart/form-data">
+      <!-- Feedback Text -->
+      <label for="feedback">Feedback</label>
+      <textarea id="feedback" name="feedback" rows="6" placeholder="Describe your experience, concern, suggestion, etc."></textarea>
+
+      <!-- Category Dropdown -->
+      <label for="category">Category</label>
+      <select id="category" name="category">
+        <option value="">Select a category</option>
+        <option value="experience">Experience</option>
+        <option value="concern">Concern</option>
+        <option value="suggestion">Suggestion</option>
+        <option value="other">Other</option>
+      </select>
+
+      <!-- File Upload -->
+      <label for="file">Attach File (optional)</label>
+      <input type="file" id="file" name="file">
+      <span class="file-label">No file chosen</span>
+
+      <!-- Submit Button -->
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+  </div>
+
+</body>
+</html>

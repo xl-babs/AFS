@@ -1,0 +1,164 @@
+<!DOCTYPE html> <!-- Declare HTML5 document type -->
+<html lang="en"> <!-- Root element with language attribute -->
+<head>
+     <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+
+  <link rel="icon" type="image/svg+xml" href="/images/icons/favicon.svg">
+
+  <meta charset="UTF-8" /> <!-- Character encoding -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <!-- Responsive scaling -->
+  <title>Anonymous Feedback System</title> <!-- Page title shown in tab -->
+ 
+  <script src="https://cdn.tailwindcss.com"></script> <!-- Load Tailwind CSS from CDN for utility styling -->
+  <style>
+    /* Improve keyboard focus visibility for accessibility */
+    :focus-visible {
+      outline: 2px solid #2563eb;
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex items-start justify-center py-10"> <!-- Light background, full viewport height, center content vertically with padding -->
+  <!-- Container card for the feedback form -->
+  <div class="w-full max-w-2xl bg-white rounded-2xl shadow-md ring-1 ring-gray-200 overflow-hidden">
+    <!-- Header with branding and navigation -->
+    <header class="flex items-center justify-between px-6 py-4 border-b">
+      <div class="text-lg font-semibold">Anonymous Feedback System</div> <!-- Title/logo area -->
+      <nav class="flex gap-6 text-sm font-medium"> <!-- Navigation links -->
+        <a href="#" class="text-gray-700 hover:text-gray-900">Dashboard</a> <!-- Dashboard link -->
+        <a href="#" class="text-gray-700 hover:text-gray-900">Feedback</a> <!-- Feedback link -->
+      </nav>
+      <div class="ml-4"> <!-- Spacer before avatar -->
+        <div class="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center text-white font-medium">E</div> <!-- Avatar placeholder with initial -->
+      </div>
+    </header>
+
+    <!-- Main content area -->
+    <main class="px-8 py-10">
+      <h1 class="text-4xl font-bold leading-tight mb-2">Submit Anonymous Feedback</h1> <!-- Heading -->
+      <p class="text-gray-600 mb-8">Please provide your feedback or describe the issue. Your identity will be kept anonymous.</p> <!-- Subtext -->
+
+      <!-- Feedback form -->
+      <form id="feedbackForm" class="space-y-6" novalidate> <!-- ID for script targeting, spacing between sections, disable native validation for custom logic -->
+        <!-- Feedback textarea block -->
+        <div>
+          <label for="feedback" class="block text-base font-medium text-gray-900 mb-2">Feedback</label> <!-- Label bound to textarea -->
+          <textarea id="feedback" name="feedback" rows="6" required
+            class="w-full rounded-lg border border-gray-300 p-4 text-sm resize-none placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Describe your experience, concern, suggestion, etc."></textarea> <!-- Multiline input for comments -->
+          <p class="mt-1 text-sm text-red-600 hidden" id="feedbackError">Feedback is required.</p> <!-- Validation error message, hidden by default -->
+        </div>
+
+        <!-- Category selection block -->
+        <div>
+          <label for="category" class="block text-base font-medium text-gray-900 mb-2">Category</label> <!-- Label for dropdown -->
+          <div class="relative"> <!-- Container for custom arrow overlay -->
+            <select id="category" name="category" required
+              class="appearance-none w-full rounded-lg border border-gray-300 p-4 pr-10 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+              <option value="" disabled selected>Select a category</option> <!-- Placeholder option -->
+              <option value="harassment">Harassment</option> <!-- Example category -->
+              <option value="suggestion">Suggestion</option>
+              <option value="praise">Praise</option>
+              <option value="bias">Bias</option>
+              <option value="other">Other</option>
+            </select> <!-- Dropdown for tagging feedback -->
+            <!-- Decorative dropdown arrow -->
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+              <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2"
+                   viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/> <!-- Arrow shape -->
+              </svg>
+            </div>
+          </div>
+          <p class="mt-1 text-sm text-red-600 hidden" id="categoryError">Please select a category.</p> <!-- Category validation error -->
+        </div>
+
+        <!-- File attachment block -->
+        <div>
+          <label class="block text-base font-medium text-gray-900 mb-2">Attach File <span class="text-sm font-normal text-gray-500">(optional)</span></label> <!-- Label with optional note -->
+          <div class="flex items-center gap-4"> <!-- Layout for button and filename -->
+            <label for="attachment"
+              class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 cursor-pointer">
+              Choose a file <!-- Styled file chooser trigger -->
+            </label>
+            <span id="fileName" class="text-sm text-gray-600">No file chosen</span> <!-- Display selected file name -->
+            <input type="file" id="attachment" name="attachment" class="sr-only" /> <!-- Actual file input visually hidden -->
+          </div>
+        </div>
+
+        <!-- Submit button -->
+        <div>
+          <button type="submit"
+            class="w-full inline-flex justify-center items-center rounded-2xl bg-red-600 px-6 py-4 text-white font-medium text-lg hover:bg-blue-700 focus-visible:ring-4 focus-visible:ring-blue-300 transition">
+            Submit <!-- Primary action -->
+          </button>
+        </div>
+      </form>
+
+      <!-- Success message area, hidden initially -->
+      <div id="successMessage" class="hidden mt-6 p-4 rounded-lg bg-green-50 border border-green-200 text-green-800">
+        Thank you. Your feedback has been submitted anonymously.
+      </div>
+    </main>
+  </div>
+
+  <!-- JavaScript for interactive behavior -->
+  <script>
+    // Grab elements by ID for manipulation
+    const form = document.getElementById("feedbackForm");
+    const feedbackEl = document.getElementById("feedback");
+    const categoryEl = document.getElementById("category");
+    const feedbackError = document.getElementById("feedbackError");
+    const categoryError = document.getElementById("categoryError");
+    const successMessage = document.getElementById("successMessage");
+    const fileInput = document.getElementById("attachment");
+    const fileNameSpan = document.getElementById("fileName");
+
+    // Update displayed file name when user selects a file
+    fileInput.addEventListener("change", () => {
+      if (fileInput.files.length > 0) {
+        fileNameSpan.textContent = fileInput.files[0].name; // Show selected file name
+      } else {
+        fileNameSpan.textContent = "No file chosen"; // Reset if cleared
+      }
+    });
+
+    // Form submission handler
+    form.addEventListener("submit", (e) => {
+      e.preventDefault(); // Prevent default page reload
+
+      let valid = true; // Track overall validity
+
+      // Validate feedback textarea is not empty
+      if (!feedbackEl.value.trim()) {
+        feedbackError.classList.remove("hidden"); // Show error
+        valid = false;
+      } else {
+        feedbackError.classList.add("hidden"); // Hide error
+      }
+
+      // Validate category selection
+      if (!categoryEl.value) {
+        categoryError.classList.remove("hidden"); // Show error
+        valid = false;
+      } else {
+        categoryError.classList.add("hidden"); // Hide error
+      }
+
+      if (!valid) return; // Bail out if invalid
+
+      // Simulate submission (placeholder for real API call)
+      form.reset(); // Clear fields
+      fileNameSpan.textContent = "No file chosen"; // Reset file label
+      feedbackError.classList.add("hidden"); // Clear any leftover errors
+      categoryError.classList.add("hidden");
+
+      // Show success feedback
+      successMessage.classList.remove("hidden");
+      setTimeout(() => {
+        successMessage.classList.add("hidden"); // Auto-hide after delay
+      }, 5000);
+    });
+  </script>
+</body>
+</html>

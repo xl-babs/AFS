@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anonymous Feedback</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+background-color: #f0f2f5;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+margin: 0;
+color: #333;
+}
+
+    .container {
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 100%;
+        text-align: center;
+    }
+
+    h1 {
+        color: #0056b3;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 1.1em;
+        line-height: 1.6;
+        margin-bottom: 25px;
+    }
+
+    textarea {
+        width: 100%;
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1em;
+        resize: vertical;
+        min-height: 150px;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+    }
+
+    button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.1em;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    .info-section {
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid #eee;
+        color: #666;
+        font-size: 0.9em;
+    }
+
+    .info-section p {
+        margin-bottom: 5px;
+    }
+
+    .info-section strong {
+        color: #333;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Share Your Anonymous Feedback</h1>
+<p>Your thoughts matter to us. Use this form to provide feedback, suggestions, or concerns completely anonymously. We do not track any personal information.</p>
+
+    <form action="#" method="POST">
+        <textarea name="feedback" placeholder="Type your feedback here..." required></textarea>
+        <button type="submit">Submit Feedback</button>
+    </form>
+
+    <div class="info-section">
+        <p><strong>🔒 Your Privacy is Our Priority</strong></p>
+        <p>This system is designed to be completely anonymous. No IP addresses, names, or other identifying details are collected with your submission.</p>
+    </div>
+</div>
+</body>
+</html>
