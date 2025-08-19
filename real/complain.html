@@ -24,6 +24,40 @@
       font-size: 18px;
       line-height: 1.6;
     }
+    /* Status Box Styling */
+    .status-box {
+      margin-top: 40px;
+      padding: 20px;
+      border: 2px solid #999;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+    }
+    .status-box h2 {
+      margin-top: 0;
+      color: #555;
+    }
+    .status-tag {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 6px;
+      background-color: #ccc;
+      color: #333;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .status-tag.green {
+      background-color: #28a745;
+      color: white;
+    }
+    .status-buttons {
+      margin-top: 15px;
+    }
+    button {
+      margin-right: 10px;
+      padding: 8px 16px;
+      font-size: 16px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -38,6 +72,31 @@
       Customer service told me to “turn it off and on again” — which I did, and now it won’t turn on at all. Also, the packaging smelled like burnt toast. I don’t know what’s going on over there, but I’d like a refund, an apology, and maybe a therapist.
     </p>
     <a href="admin.html" class="sidebar-item active">Dashboard</a>
+
+      <!-- Separate Status Box -->
+    <div class="status-box">
+      <h2>Follow-Up Status</h2>
+      <p><strong>Has this issue been addressed?</strong></p>
+      <div class="status-buttons">
+        <button onclick="markAsAddressed(true)">Yes</button>
+        <button onclick="markAsAddressed(false)">No</button>
+      </div>
+      <div id="statusTag" class="status-tag">Pending Review</div>
+    </div>
   </div>
+  <script>
+    function markAsAddressed(answered) {
+        const tag = document.getElementById("statusTag");
+    if (answered) {
+      tag.textContent = "Addressed";
+      tag.classList.add("green");
+      document.body.style.backgroundColor = "#d4edda"; // Light green background
+    } else {
+      tag.textContent = "Pending Review";
+      tag.classList.remove("green");
+      document.body.style.backgroundColor = "#fff0f0"; // Reset to original light red
+    }
+  }
+</script>
 </body>
 </html>
